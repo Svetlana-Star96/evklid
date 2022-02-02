@@ -91,7 +91,7 @@ img {
 .header {
   height: 100px;
   background-color: white;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
 .header__container {
   display: flex;
@@ -150,46 +150,97 @@ img {
 }
 .burger {
   position: relative;
+  z-index: 1000;
   display: none;
-  width: 30px;
-  height: 23px;
-  padding: 0;
+  width: 40px;
+  height: 33px;
+  padding: 5px;
+}
+.burger:focus {
+  outline: 2px solid #FF9900;;
 }
 .burger__line {
   display: block;
   width: 30px;
   height: 3px;
   background-color: #333333;
+  transition-duration: .2s;
+  transition-delay: .2s;
 }
 .burger__line:before,
 .burger__line:after {
   content: '';
   position: absolute;
-  left: 0;
+  left: 5px;
   display: block;
-  width: inherit;
+  width: 30px;
   height: inherit;
-  background-color: inherit;
+  background-color: #333333;
+  transition: transform .2s, top .2s .2s;
 }
 .burger__line:before {
-  top: 0;
+  top: 5px;
 }
 .burger__line:after {
-  bottom: 0;
+  bottom: 5px;
+}
+.burger.is-active .burger__line {
+  background-color: transparent;
+}
+.burger.is-active .burger__line:before {
+  top: 15px;
+  transform: rotateZ(-45deg);
+  transition: top 0.3s, transform .2s .2s;
+}
+.burger.is-active .burger__line:after {
+  top: 15px;
+  transform: rotateZ(45deg);
+  transition: top 0.3s, transform .2s .2s;
 }
 
 /*Hero*/
+.section-hero__content {
+  position: relative;
+  min-height: 620px;
+  padding: 100px 80px;
+}
+.swiper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
 .banner__slide {
-  display: flex;
-  flex-direction: column;
-  height: 620px;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  padding-left: 80px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .banner__slide--1 {
-  background: url(../img/banner-bg.jpg) center center no-repeat;
-  background-size: cover;
+  background-image: url(../img/banner-bg.jpg);
+}
+.banner__slide--2 {
+  background-image: url(../img/banner-bg-slide-2.jpg);
+}
+.banner__slide--3 {
+  background-image: url(../img/banner-bg-slide-3.jpg);
+}
+.swiper-pagination {
+  bottom: 30px!important;
+}
+.swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.swiper-pagination-bullet-active {
+  background-color: #fff;
+}
+.text__slide {
+  position: relative;
+  z-index: 2;
+  max-width: 840px;
 }
 .section-hero__title {
   max-width: 837px;
@@ -311,6 +362,7 @@ img {
   font-size: 18px;
   line-height: 22px;
   color: #333;
+  cursor: pointer;
   transition: color .3s ease;
 }
 .steps__number_active {
@@ -326,8 +378,11 @@ img {
   color: #E1670E;
 }
 .steps__content {
-  display: flex;
+  display: none;
   justify-content: space-between;
+}
+.steps__content_active {
+  display: flex;
 }
 .steps__left {
   max-width: 758px;
@@ -349,8 +404,13 @@ img {
 .steps__img {
   width: 870px;
   margin-top: 10px;
-  background: url(../img/work-step1.jpg) center center no-repeat;
-  background-size: cover;
+  /*background: url(../img/work-step1.jpg) center center no-repeat;*/
+  /*background-size: cover;*/
+}
+.steps__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .steps__btn {
   width: auto;
@@ -386,6 +446,9 @@ img {
 .section-faq__title {
   margin-bottom: 43px;
 }
+.section-faq__content {
+  border-bottom: 1px solid #CACACA;
+}
 .ask {
   display: flex;
   justify-content: space-between;
@@ -394,7 +457,6 @@ img {
   margin-bottom: -1px;
   padding-bottom: 28px;
   border-top: 1px solid #CACACA;
-  border-bottom: 1px solid #CACACA;
   transition-property: border-color;
   transition-duration: .3s;
   transition-timing-function: ease;
@@ -404,9 +466,12 @@ img {
   outline: none;
   border-color: #FF9900;
 }
-.ask:hover + .ask,
-.ask:focus +.ask {
-  border-top: 1px solid transparent;
+.ask:hover + .section-faq__item-content + .ask,
+.ask:focus + .section-faq__item-content + .ask {
+  border-color: #FF9900;
+}
+.section-faq__content.border-color {
+  border-color: #FF9900;
 }
 .ask:hover .ask__title,
 .ask:focus .ask__title {
@@ -434,12 +499,29 @@ img {
   padding: 10px;
   border-radius: 50%;
   background-color: #ECECEC;
-  transition: background-color .3s ease;
+  transition: background-color .3s ease, transform .3s ease;;
 }
 .ask__plus-icon path {
   width: 31px;
   height: 31px;
   transition: fill .3s ease;
+}
+.section-faq__item-content {
+  height: auto;
+  border-bottom: 1px solid transparent;
+}
+.section-faq__item-info {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-size: 16px;
+  line-height: 32px;
+  color: #333;
+}
+.ask-active {
+  border-bottom: none;
+}
+.ask-active .ask__plus {
+  transform: rotate(45deg);
 }
 
 /*Footer*/
@@ -620,7 +702,26 @@ form {
     display: block;
   }
   .nav__list {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    flex-direction: column;
+    height: 100vh;
+    width: 420px;
+    max-width: 100%;
+    padding: 50px;
+    padding-top: 100px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateX(-101%);
+    transition: transform 0.4s;
+  }
+  .nav__list.is-active {
+    transform: translateX(0);
+  }
+  .nav__item:not(:last-child) {
+    margin-bottom: 15px;
   }
   .header__right {
     margin-left: 0;
@@ -649,8 +750,8 @@ form {
   .header__logo {
     width: 150px;
   }
-  .banner__slide {
-    height: auto;
+  .section-hero__content {
+    min-height: auto;
     padding: 160px 77px;
   }
   .banner__slide--1 {
@@ -729,7 +830,7 @@ form {
     padding: 34px 40px;
   }
 
-  .banner__slide {
+  .section-hero__content {
     padding: 160px 40px;
   }
   .section-hero__title {
@@ -819,16 +920,17 @@ form {
     line-height: 1;
     color: #FF9900;
   }
-
-  .header {
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  }
   .header__logo {
     width: 110px;
   }
 
-  .banner__slide {
+  .section-hero__content {
     padding: 60px 22px;
+  }
+  .text__slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .section-hero__title {
     margin-bottom: 6px;
@@ -842,9 +944,12 @@ form {
     line-height: 15px;
     text-align: center;
   }
-  .section-hero__btn {
-    margin-left: auto;
-    margin-right: auto;
+  .swiper-pagination {
+    bottom: 15px!important;
+  }
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
   }
 
   .section-about {
