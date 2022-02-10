@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+  //Burger
   document.querySelector('#burger').addEventListener('click', function(event) {
     event.currentTarget.classList.toggle('is-active');
     document.querySelector('.nav__list').classList.toggle('is-active');
@@ -12,6 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
       el: '.swiper-pagination',
       clickable: 'true'
     }
+  });
+
+  //Search
+  document.querySelector('#search-open').addEventListener('click', function() {
+    document.querySelector('#form-search').classList.add('open');
+  });
+  document.querySelector('#search-close').addEventListener('click', function() {
+    document.querySelector('#form-search').classList.remove('open');
   });
 
   //1. найти все кнопки табов
@@ -37,20 +46,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.ask').forEach(function(title) {
     title.addEventListener('click', function(event) {
-      //const content = event.currentTarget.nextElementSibling;
       event.currentTarget.classList.toggle('ask-active');
+      document.querySelectorAll('.ask').forEach(function(elem) {
+        if (elem!=event.currentTarget) {
+          elem.classList.remove('ask-active');
+        }
+      });
+      //const content = event.currentTarget.nextElementSibling;
     })
-  })
+  });
 
-
+  //Махинации с цветом бордера у последнего элемента в разделе FAQ
   document.querySelectorAll('.ask').forEach(function(el) {
     el.addEventListener('click', function() {
-      if (el != document.querySelector('.ask:last-of-type')) {
+      if (el != document.querySelector('.ask:nth-last-of-type(2)')) {
         document.querySelector('.section-faq__content').classList.remove('border-color');
       }
     })
     el.addEventListener('mouseover', function() {
-      if (el == document.querySelector('.ask:last-of-type')) {
+      console.log(el);
+      console.log(document.querySelector('.ask:nth-last-of-type(2)'));
+      if (el == document.querySelector('.ask:nth-last-of-type(2)')) {
         document.querySelector('.section-faq__content').classList.add('border-color');
       }
     });
@@ -62,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.addEventListener('click', function() {
-    if (document.querySelector('.ask:last-of-type') != document.querySelector('.ask:focus')) {
+    if (document.querySelector('.ask:nth-last-of-type(2)') != document.querySelector('.ask:focus')) {
       document.querySelector('.section-faq__content').classList.remove('border-color');
     }
   })
