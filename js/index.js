@@ -5,10 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.nav__list').classList.toggle('is-active');
   });
   const swiper = new Swiper('.swiper', {
-    // Optional parameters
     loop: true,
-
-    // If we need pagination
     pagination: {
       el: '.swiper-pagination',
       clickable: 'true'
@@ -52,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
           elem.classList.remove('ask-active');
         }
       });
-      //const content = event.currentTarget.nextElementSibling;
     })
   });
 
@@ -64,8 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     el.addEventListener('mouseover', function() {
-      console.log(el);
-      console.log(document.querySelector('.ask:nth-last-of-type(2)'));
       if (el == document.querySelector('.ask:nth-last-of-type(2)')) {
         document.querySelector('.section-faq__content').classList.add('border-color');
       }
@@ -91,3 +85,5 @@ $( function() {
     icons: false
   });
 } );
+
+var lazyLoadInstance = new LazyLoad({});

@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="css/style-prefix.css">
+  <link rel="stylesheet" href="css/style.min.css">
   <title>Евклид - Проектные системы</title>
 </head>
 
@@ -172,7 +173,7 @@
             </div>
             <div class="col-12 col-lg-6">
               <div class="steps__img">
-                <img src="img/work-step1.jpg" alt="" aria-hidden="true">
+                <img class="lazy" data-src="img/work-step1.jpg" alt="" aria-hidden="true">
               </div>
             </div>
           </div>
@@ -186,7 +187,7 @@
               <button class="steps__btn-o btn-o">Договор</button>
             </div>
             <div class="steps__img">
-              <img src="img/work-step2.jpg" alt="" aria-hidden="true">
+              <img class="lazy" data-src="img/work-step2.jpg" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="steps__content" data-target="three">
@@ -199,7 +200,7 @@
               <button class="steps__btn-o btn-o">Договор</button>
             </div>
             <div class="steps__img">
-              <img src="img/work-step3.jpg" alt="" aria-hidden="true">
+              <img class="lazy" data-src="img/work-step3.jpg" alt="" aria-hidden="true">
             </div>
           </div>
           <div class="steps__content" data-target="four">
@@ -212,7 +213,7 @@
               <button class="steps__btn-o btn-o">Договор</button>
             </div>
             <div class="steps__img">
-              <img src="img/work-step4.jpg" alt="" aria-hidden="true">
+              <img class="lazy" data-src="img/work-step4.jpg" alt="" aria-hidden="true">
             </div>
           </div>
         </div>
@@ -368,10 +369,11 @@
     </div>
   </footer>
 
+  <script src="js/lazyload.min.js"></script>
   <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  <script src="js/index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script src="js/index.min.js"></script>
 
 </body>
 
